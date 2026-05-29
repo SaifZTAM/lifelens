@@ -1,0 +1,133 @@
+# Codebase Structure
+
+**Analysis Date:** 2026-05-30
+
+## Directory Layout
+
+```
+lifelens/
+├── .planning/           # GSD planning rules and maps
+│   └── codebase/        # Core codebase documentation maps
+├── app/                 # Next.js pages and API route handlers
+│   ├── (dashboard)/     # Protected dashboard sub-pages
+│   ├── api/             # API Route endpoint handlers
+│   ├── login/           # Login authentication page
+│   ├── signup/          # Registration page
+│   ├── globals.css      # Core css entry and custom tokens
+│   ├── layout.tsx       # Next.js root layout layout wrapper
+│   └── page.tsx         # Product marketing landing page
+├── components/          # React layout and widget components
+│   ├── providers/       # Context/theme wrapper scripts
+│   ├── ui/              # Stylized micro-components
+│   ├── Logo.tsx         # Logo drawing components
+│   └── Sidebar.tsx      # Protected dashboard navigation panel
+├── extension/           # Chrome Extension project directory
+│   ├── dist/            # Compiled static Chrome Extension folder
+│   ├── background.ts    # Harvester and nudge loop service worker
+│   ├── build.mjs        # Custom esbuild build script
+│   ├── content.ts       # Page overlay display script
+│   ├── manifest.json    # Chrome Extension MV3 manifest config
+│   ├── popup.html       # Sign-in popover UI
+│   └── popup.ts         # Sign-in handler script
+├── hooks/               # Custom reusable React hooks
+│   └── use-mouse-position-ref.ts
+├── lib/                 # Core server, client, and helper initializers
+│   ├── supabase/        # Database initialization utilities
+│   └── utils.ts         # Tailwind merger helpers
+├── public/              # Global icons and images
+└── supabase/            # Database schema migrations
+    └── schema.sql       # PostgreSQL structure and RLS setup
+```
+
+## Directory Purposes
+
+**app/**
+- Purpose: Application routing and endpoints.
+- Contains: `page.tsx` routes and `route.ts` API handlers.
+- Key files:
+  - `app/globals.css` - Custom design system tokens and glassmorphism styling definitions.
+  - `app/layout.tsx` - App layout setup.
+
+**app/(dashboard)/**
+- Purpose: Views restricted to authenticated users.
+- Contains: Layout and specific dashboard page folders.
+- Key files:
+  - `app/(dashboard)/layout.tsx` - Renders layout with `components/Sidebar.tsx` for protected routes.
+  - `app/(dashboard)/dashboard/page.tsx` - Overview metrics dashboard.
+
+**app/api/**
+- Purpose: Serverless route handlers for telemetry updates and AI generation.
+- Key files:
+  - `api/events/track/route.ts` - Receives tab event batches from the client extension.
+  - `api/nudges/generate/route.ts` - Runs focus assessments and triggers GPT-based coach nudges.
+
+**components/ui/**
+- Purpose: Premium, animated visual interface components.
+- Key files:
+  - `aurora-background.tsx` - Animated color backgrounds.
+  - `dynamic-wave-canvas-background.tsx` - Fluid interactive wave backgrounds.
+  - `text-cursor-proximity.tsx` - Text scale scaling based on mouse distance.
+
+**extension/**
+- Purpose: Source codebase for the Chrome Extension module.
+- Key files:
+  - `extension/manifest.json` - Manifest configuration registering permissions (`alarms`, `storage`, `notifications`).
+  - `extension/background.ts` - Harvesting background worker.
+  - `extension/build.mjs` - Compiles TS sources to `extension/dist/`.
+
+**lib/supabase/**
+- Purpose: Initializing clients for database reads/writes.
+- Contains:
+  - `client.ts` - Client browser actions.
+  - `server.ts` - Server components/cookies actions.
+  - `admin.ts` - Service-role client for RLS bypass.
+
+## Key File Locations
+
+**Entry Points:**
+- `app/page.tsx` - Web application homepage.
+- `extension/background.ts` - Chrome Extension background processes.
+
+**Configuration:**
+- `package.json` - npm dependencies and scripts.
+- `tsconfig.json` - TypeScript compiler parameters.
+- `eslint.config.mjs` - ESLint configuration.
+- `.env.local` - Environment variables.
+
+**Database Schema:**
+- `supabase/schema.sql` - PostgreSQL setup.
+
+## Naming Conventions
+
+**Files:**
+- PascalCase for React components: `Sidebar.tsx`, `Logo.tsx`, `ThemeToggle.tsx`.
+- kebab-case for config files or hooks: `use-mouse-position-ref.ts`, `postcss.config.mjs`.
+- `page.tsx` & `route.ts` - Fixed next.js App router conventions.
+
+**Directories:**
+- kebab-case for folders: `(dashboard)`, `auth-fuse`, `theme-provider`.
+
+## Where to Add New Code
+
+**New Frontend Features/Pages:**
+- Under `app/(dashboard)/<name>/page.tsx`.
+- Add sub-components in `components/` or `components/ui/` if reusable.
+
+**New API Endpoint:**
+- Under `app/api/<name>/route.ts`.
+
+**Chrome Extension Updates:**
+- Modify `extension/background.ts`, `extension/content.ts`, or `extension/popup.ts`.
+- Run `npm run build:extension` to compile changes.
+
+## Special Directories
+
+**extension/dist/**
+- Purpose: Build artifact directory for the extension.
+- Source: Generated by compiling the extension using `npm run build:extension`.
+- Committed: Yes (in the current git state).
+
+---
+
+*Structure analysis: 2026-05-30*
+*Update when directory structure changes*
