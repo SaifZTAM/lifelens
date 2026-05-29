@@ -1,0 +1,21 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="sq">
+      <rect x="0" y="0" width="200" height="200" rx="48"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="200" height="200" rx="48" fill="#0d9488"/>
+
+  <!-- Left circle -->
+  <circle cx="70" cy="100" r="48" fill="none" stroke="white" stroke-width="5" clip-path="url(#sq)"/>
+  <!-- Right circle -->
+  <circle cx="130" cy="100" r="48" fill="none" stroke="white" stroke-width="5" clip-path="url(#sq)"/>
+
+  <!-- Vesica lens fill -->
+  <path d="M100,62 C114,72 122,86 122,100 C122,114 114,128 100,138 C86,128 78,114 78,100 C78,86 86,72 100,62 Z" fill="white"/>
+
+  <!-- Center pupil -->
+  <circle cx="100" cy="100" r="10" fill="#0d9488"/>
+</svg>
