@@ -119,4 +119,4 @@ LifeLens is structured as an interactive web dashboard (Next.js App Router) supp
 ---
 
 *Architecture analysis: 2026-05-30*
-*Update when major patterns change*
+*Update when major patterns changes*
